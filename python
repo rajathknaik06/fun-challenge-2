@@ -1,0 +1,67 @@
+""" Develop a program that evaluates the strength of a given password and categorizes it as "Weak," "Moderate," or "Strong" based on specific criteria.
+
+
+
+"Strong: Password is strong.": If the password meets all the character type requirements (uppercase, lowercase, digit, and special character) and is at least 8 characters long.
+"Moderate: Password is moderately strong.": If the password meets at least one of the character type requirements (either uppercase, lowercase, digit, or special character) but does not meet all of them or is at least 8 characters long.
+"Weak: Password is too short.": If the password is shorter than 8 characters in length.
+
+
+Function Signature: password_strength(password)
+
+
+
+Use global variables:
+
+has_uppercase = False
+
+has_lowercase = False
+
+has_digit = False
+
+has_special_char = False
+
+Input format :
+The input consists of a string representing the password to be evaluated. The password can contain letters (uppercase and lowercase), numbers, and special characters.
+
+Output format :
+The output displays any of the following:
+
+"Strong: Password is strong." if the password contains at least one uppercase letter, one lowercase letter, one digit, and one special character.
+
+"Moderate: Password is moderately strong." if the password meets some, but not all, of the strong password criteria.
+
+"Weak: Password is too short." if the password is less than 8 characters long."""
+
+
+has_uppercase = False
+has_lowercase = False
+has_digit = False
+has_special_char = False
+
+def password_strength(password):
+    global has_uppercase, has_lowercase, has_digit, has_special_char
+
+    if len(password) < 8:
+        return "Weak: Password is too short."
+
+    for char in password:
+        if char.isupper():
+            has_uppercase = True
+        if char.islower():
+            has_lowercase = True
+        if char.isdigit():
+            has_digit = True
+        if not char.isalnum() and not char.isspace():
+            has_special_char = True
+
+    if has_uppercase and has_lowercase and has_digit and has_special_char:
+        return "Strong: Password is strong."
+    elif has_uppercase or has_lowercase or has_digit or has_special_char:
+        return "Moderate: Password is moderately strong."
+    
+
+password = input()
+
+result =password_strength(password)
+print(result)
